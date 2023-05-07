@@ -16,6 +16,7 @@
   "author": "vishwajit vm",
   "license": "ISC",
   "dependencies": {
+    "nodemon": "^2.0.22",
     "socket.io": "^4.6.1"
   }
 }
