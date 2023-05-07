@@ -15,4 +15,11 @@ io.on('connection' , Socket => {
     Socket.on('send' , message => {
         Socket.broadcast.emit('receive' , {message: message , name: users[Socket.id] })
     })
+
+    //DISCONNECT
+    Socket.on('disconnect' , message => {
+        Socket.broadcast.emit('left' , users[Socket.id])
+        delete users[socket.id] ;
+    })
+
 })

@@ -3,6 +3,7 @@ const socket = io('http://localhost:8000') ;
 const form = document.getElementById('send-container') ;
 const messageInput = document.getElementById('messageInp') ;
 const messageContainer = document.querySelector(".container") ;
+var audio = new Audio('ting.mp3') ;
 
 const append = (message , position) => {
     const messageElement = document.createElement('div') ;
@@ -10,6 +11,9 @@ const append = (message , position) => {
     messageElement.classList.add('message')
     messageElement.classList.add(position)
     messageContainer.append(messageElement) ;
+    if(position === 'left') {
+        audio.play() ;
+    }
 }
 
 //My message send
@@ -33,4 +37,9 @@ socket.on('user-joined' , name => {
 //user Recived
 socket.on('receive' , data => {
     append(`${data.name}: ${data.message}` , 'left')
+})
+
+//user Left the chat
+socket.on('left' , name => {
+    append(`${name}: Left the chat` , 'left')
 })
