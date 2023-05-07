@@ -1,24 +1,24 @@
-const { Socket } = require('socket.io');
-//NODE JS SERVER WHICH WILL HANDEL SOCKET.IO CONNECTION
+const { socket } = require('socket.io');
+//NODE JS SERVER WHICH WILL HANDEL socket.IO CONNECTION
 const io  = require('socket.io')(8000) //port
 
 const users = {} ;
-io.on('connection' , Socket => {
-    //NEW USER JOIN SOCKET
-    Socket.on('new-user-joined' , name => {
+io.on('connection' , socket => {
+    //NEW USER JOIN socket
+    socket.on('new-user-joined' , name => {
         console.log("New user" , name)
-        users[Socket.id] = name ;
-        Socket.broadcast.emit('user-joined' , name) ; //this will emit a message to all user except the user who joied the chat
+        users[socket.id] = name ;
+        socket.broadcast.emit('user-joined' , name) ; //this will emit a message to all user except the user who joied the chat
     })
 
-    //NEW MESSAGE SEND SOCKET
-    Socket.on('send' , message => {
-        Socket.broadcast.emit('receive' , {message: message , name: users[Socket.id] })
+    //NEW MESSAGE SEND socket
+    socket.on('send' , message => {
+        socket.broadcast.emit('receive' , {message: message , name: users[socket.id] })
     })
 
     //DISCONNECT
-    Socket.on('disconnect' , message => {
-        Socket.broadcast.emit('left' , users[Socket.id])
+    socket.on('disconnect' , message => {
+        socket.broadcast.emit('left' , users[socket.id])
         delete users[socket.id] ;
     })
 
