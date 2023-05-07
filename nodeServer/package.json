@@ -1,0 +1,18 @@
+{
+  "name": "nodeserver",
+  "version": "1.0.0",
+  "description": "This is Node server for my vm messanger app, which is the best chatting app in the world",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vishwajit",
+    "vm",
+    "vm",
+    "messanger",
+    "app"
+  ],
+  "author": "vishwajit vm",
+  "license": "ISC"
+}
